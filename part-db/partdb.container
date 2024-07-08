@@ -1,0 +1,25 @@
+[Unit]
+Description=Part-DB quadlet
+After=partdb-mariadb.service
+
+[Container]
+Image=docker.io/jbtronics/part-db1:1.13.1
+ContainerName=partdb
+AutoUpdate=registery
+EnvironmentFile=/home/awm/services/part-db/containers-environment
+Network=partdb.network
+Label="traefik.enable=true"
+Label="traefik.http.routers.partdb.rule=Host(`components.sigmadraconis.ca`)"
+Label="traefik.http.routers.partdb.tls=true"
+Label="traefik.http.routers.partdb.tls.certresolver=lets-encrypt"
+Label="traefik.http.services.partdb.loadbalancer.server.port=80"
+Volume=/home/awm/services/part-db/var/db:/var/www/html/var/db
+Volume=/home/awm/services/part-db/var/media:/var/www/html/public/media
+Volume=/home/awm/services/part-db/var/uploads:/var/www/html/uploads
+Volume=/home/awm/services/part-db/var/backups:/var/www/html/var/backups
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

@@ -1,0 +1,9 @@
+# Vairë Container Definitions
+
+Home network container definitions and reverse proxy configuration.
+
+## Services
+
+* [Part-DB](https://docs.part-db.de/): Electronics and hardware components inventory tracking.
+* [Snipe-IT](https://snipeitapp.com/): Asset management and tracking.
+* [Traefik](https://traefik.io/): Application proxy.

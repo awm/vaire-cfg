@@ -1,0 +1,16 @@
+[Unit]
+Description=Part-DB backend database quadlet
+
+[Container]
+Image=docker.io/mariadb:11
+ContainerName=partdb-mariadb
+AutoUpdate=registery
+EnvironmentFile=/home/awm/services/part-db/containers-environment
+Network=partdb.network
+Volume=/home/awm/services/part-db/var/mysql:/var/lib/mysql
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=partdb.service multi-user.target default.target

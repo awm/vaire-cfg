@@ -1,0 +1,27 @@
+[Unit]
+Description=Traefik reverse proxy quadlet
+
+[Container]
+Image=docker.io/traefik:3.0
+ContainerName=traefik
+AutoUpdate=registery
+EnvironmentFile=/home/awm/services/traefik/containers-environment
+PublishPort=80:80
+PublishPort=443:443
+Network=partdb.network
+Label="traefik.enable=true"
+Label="traefik.http.routers.dashboard.rule=Host(`traefik.sigmadraconis.ca`)"
+Label="traefik.http.routers.dashboard.tls=true"
+Label="traefik.http.routers.dashboard.tls.certresolver=lets-encrypt"
+Label="traefik.http.routers.dashboard.service=api@internal"
+#Label="traefik.http.routers.dashboard.middlewares=traefik-auth"
+#Label="traefik.http.middlewares.traefik-auth.basicauth.usersfile=/home/awm/services/traefik/users.txt"
+Volume=/home/awm/services/traefik/traefik.yml:/etc/traefik/traefik.yml
+Volume=/home/awm/services/traefik/var/acme.json:/acme.json:z
+Volume=/run/user/1000/podman/podman.sock:/var/run/docker.sock:z
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

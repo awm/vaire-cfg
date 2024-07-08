@@ -1,0 +1,34 @@
+# Backend providers
+providers:
+  docker:
+    exposedbydefault: false
+
+# API and dashboard configuration
+api:
+  dashboard: true
+  insecure: false
+
+# TLS configuration
+certificatesresolvers:
+  lets-encrypt:
+    acme:
+      email:        andrew.macisaac@gmail.com
+      storage:      /acme.json
+      dnschallenge:
+        provider:   easydns
+
+serverstransport:
+  # Necessary to allow backend services which are TLS-only, but which also only provide self-signed certificates:
+  insecureskipverify: true
+
+# Entry points
+entrypoints:
+  web:
+    address:  :80
+    http:
+      redirections:
+        entrypoint:
+          to:     websecure
+          scheme: https
+  websecure:
+    address:  :443
