@@ -1,0 +1,34 @@
+# Database parameters
+DB_HOST=snipe-mariadb
+DB_PORT=3306
+MYSQL_DATABASE=snipeit
+MYSQL_PASSWORD=%MYSQL_PASSWORD%
+MYSQL_ROOT_PASSWORD=%MYSQL_ROOT_PASSWORD%
+MYSQL_USER=snipeit
+
+# Email Parameters
+# - the hostname/IP address of your mailserver
+MAIL_PORT_587_TCP_ADDR=%MAIL_PORT_587_TCP_ADDR%
+#the port for the mailserver (probably 587, could be another)
+MAIL_PORT_587_TCP_PORT=587
+# the default from address, and from name for emails
+MAIL_ENV_FROM_ADDR=%MAIL_ENV_FROM_ADDR%
+MAIL_ENV_FROM_NAME=Sigma Draconis Assets
+# - pick 'tls' for SMTP-over-SSL, 'tcp' for unencrypted
+MAIL_ENV_ENCRYPTION=tls
+# SMTP username and password
+MAIL_ENV_USERNAME=%MAIL_ENV_USERNAME%
+MAIL_ENV_PASSWORD=%MAIL_ENV_PASSWORD%
+
+# Snipe-IT Settings
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=%APP_KEY%
+APP_URL=https://assets.sigmadraconis.ca
+APP_TIMEZONE=US/Pacific
+APP_LOCALE=en
+APP_TRUSTED_PROXIES=traefik
+SECURE_COOKIES=true
+  
+# Docker-specific variables
+PHP_UPLOAD_LIMIT=100

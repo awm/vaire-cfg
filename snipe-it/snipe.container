@@ -1,0 +1,23 @@
+[Unit]
+Description=Snipe-IT quadlet
+After=snipe-mariadb.service
+
+[Container]
+Image=docker.io/snipe/snipe-it:v7.0.8
+ContainerName=snipe
+AutoUpdate=registery
+EnvironmentFile=/home/awm/services/snipe-it/containers-environment
+Network=snipe.network
+Label="traefik.enable=true"
+Label="traefik.http.routers.snipe.rule=Host(`assets.sigmadraconis.ca`)"
+Label="traefik.http.routers.snipe.tls=true"
+Label="traefik.http.routers.snipe.tls.certresolver=lets-encrypt"
+Label="traefik.http.services.snipe.loadbalancer.server.port=80"
+Volume=snipe-vol:/var/lib/snipeit
+Volume=/home/awm/services/snipe-it/var/backups:/var/lib/snipeit/dumps
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

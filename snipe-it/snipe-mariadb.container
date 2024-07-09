@@ -1,0 +1,16 @@
+[Unit]
+Description=Snipe-IT backend database quadlet
+
+[Container]
+Image=docker.io/mariadb:11
+ContainerName=snipe-mariadb
+AutoUpdate=registery
+EnvironmentFile=/home/awm/services/snipe-it/containers-environment
+Network=snipe.network
+Volume=snipe-mariadb-vol:/var/lib/mysql
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=snipe.service multi-user.target default.target

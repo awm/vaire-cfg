@@ -9,6 +9,7 @@ EnvironmentFile=/home/awm/services/traefik/containers-environment
 PublishPort=80:80
 PublishPort=443:443
 Network=partdb.network
+Network=snipe.network
 Label="traefik.enable=true"
 Label="traefik.http.routers.dashboard.rule=Host(`traefik.sigmadraconis.ca`)"
 Label="traefik.http.routers.dashboard.tls=true"

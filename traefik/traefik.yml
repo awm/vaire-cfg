@@ -5,17 +5,17 @@ providers:
 
 # API and dashboard configuration
 api:
-  dashboard: true
-  insecure: false
+  dashboard:  true
+  insecure:   false
 
 # TLS configuration
 certificatesresolvers:
   lets-encrypt:
     acme:
-      email:        andrew.macisaac@gmail.com
-      storage:      /acme.json
+      email:    andrew.macisaac@gmail.com
+      storage:  /acme.json
       dnschallenge:
-        provider:   easydns
+        provider: easydns
 
 serverstransport:
   # Necessary to allow backend services which are TLS-only, but which also only provide self-signed certificates:

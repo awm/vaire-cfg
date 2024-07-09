@@ -9,14 +9,14 @@ DATABASE_URL=mysql://partdb:%MYSQL_PASSWORD%@partdb-mariadb:3306/partdb
 DEFAULT_LANG=en
 DEFAULT_TIMEZONE=America/Vancouver
 DEFAULT_URI=https://components.sigmadraconis.ca/
-INSTANCE_NAME=Part-DB
+INSTANCE_NAME=Sigma Draconis Components
 TRUSTED_PROXIES=%TRUSTED_PROXIES%
 USE_GRAVATAR=0
 
-BANNER=Welcome to Part-DB.
+BANNER=Home lab component inventory.  Other assets are tracked in [Snipe-IT](https://assets.sigmadraconis.ca).
 
 EMAIL_SENDER_EMAIL=%EMAIL_SENDER_EMAIL%
-EMAIL_SENDER_NAME=Part-DB
+EMAIL_SENDER_NAME=Sigma Draconis Components
 MAILER_DSN=%MAILER_DSN%
 
 # Digi-Key auth redirection URL: https://components.sigmadraconis.ca/en/oauth/client/ip_digikey_oauth/check
