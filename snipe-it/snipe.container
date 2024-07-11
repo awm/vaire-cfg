@@ -15,6 +15,7 @@ Label="traefik.http.routers.snipe.tls.certresolver=lets-encrypt"
 Label="traefik.http.services.snipe.loadbalancer.server.port=80"
 Volume=snipe-vol:/var/lib/snipeit
 Volume=/home/awm/services/snipe-it/var/backups:/var/lib/snipeit/dumps
+Volume=/home/awm/services/snipe-it/_5267_B.php:/var/www/html/app/Models/Labels/Sheets/Avery/_5267_B.php:ro
 
 [Service]
 Restart=always
