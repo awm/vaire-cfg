@@ -15,9 +15,10 @@ Label="traefik.http.routers.dashboard.rule=Host(`traefik.sigmadraconis.ca`)"
 Label="traefik.http.routers.dashboard.tls=true"
 Label="traefik.http.routers.dashboard.tls.certresolver=lets-encrypt"
 Label="traefik.http.routers.dashboard.service=api@internal"
-#Label="traefik.http.routers.dashboard.middlewares=traefik-auth"
-#Label="traefik.http.middlewares.traefik-auth.basicauth.usersfile=/home/awm/services/traefik/users.txt"
+Label="traefik.http.routers.dashboard.middlewares=traefik-auth"
+Label="traefik.http.middlewares.traefik-auth.basicauth.usersfile=/etc/traefik/users.txt"
 Volume=/home/awm/services/traefik/traefik.yml:/etc/traefik/traefik.yml
+Volume=/home/awm/services/traefik/users.txt:/etc/traefik/users.txt:ro
 Volume=/home/awm/services/traefik/var/acme.json:/acme.json:z
 Volume=/run/user/1000/podman/podman.sock:/var/run/docker.sock:z
 
