@@ -2,6 +2,13 @@
 
 namespace App\Models\Labels\Sheets\Avery;
 
+// Layout for an Avery 5267 or 8927 label with QR code and three fields to the right:
+//
+//  +--------+
+//  |        | Field 1
+//  |   QR   | Field 2
+//  |        | Field 3
+//  +--------+
 
 class _5267_B extends _5267
 {
