@@ -1,0 +1,28 @@
+MYSQL_DATABASE=partdb
+MYSQL_PASSWORD={{ secrets.partdb.mysql.user_password }}
+MYSQL_ROOT_PASSWORD={{ secrets.partdb.mysql.root_password }}
+MYSQL_USER=partdb
+
+ALLOW_ATTACHMENT_DOWNLOADS=0
+BASE_CURRENCY=CAD
+DATABASE_URL=mysql://partdb:{{ secrets.partdb.mysql.user_password | urlencode }}@partdb-mariadb:3306/partdb
+DEFAULT_LANG=en
+DEFAULT_TIMEZONE=America/Vancouver
+DEFAULT_URI=https://components.sigmadraconis.ca/
+INSTANCE_NAME=Sigma Draconis Components
+TRUSTED_PROXIES={{ secrets.partdb.trusted_proxies }}
+USE_GRAVATAR=0
+
+BANNER=Home lab component inventory.  Other assets are tracked in [Snipe-IT](https://assets.sigmadraconis.ca).
+
+EMAIL_SENDER_EMAIL={{ secrets.email.address }}
+EMAIL_SENDER_NAME=Sigma Draconis Components
+MAILER_DSN=smtp://{{ secrets.email.username | urlencode }}:{{ secrets.email.password | urlencode }}@{{ secrets.email.server }}:587
+
+# Digi-Key auth redirection URL: https://components.sigmadraconis.ca/en/oauth/client/ip_digikey_oauth/check
+PROVIDER_DIGIKEY_CLIENT_ID={{ secrets.partdb.providers.digikey.client_id }}
+PROVIDER_DIGIKEY_COUNTRY=CA
+PROVIDER_DIGIKEY_CURRENCY=CAD
+PROVIDER_DIGIKEY_LANGUAGE=en
+PROVIDER_DIGIKEY_SECRET={{ secrets.partdb.providers.digikey.secret }}
+PROVIDER_MOUSER_KEY={{ secrets.partdb.providers.mouser.key }}
