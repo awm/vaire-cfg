@@ -1,3 +1,6 @@
-containers-environment
+.state.yml
+*.lock
+env.sh
+secrets.yml
 traefik/users.txt
 var/

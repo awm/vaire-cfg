@@ -6,7 +6,7 @@ After=partdb-mariadb.service
 Image=docker.io/jbtronics/part-db1:1.13.1
 ContainerName=partdb
 AutoUpdate=registery
-EnvironmentFile=/home/awm/services/part-db/containers-environment
+EnvironmentFile=/home/awm/services/part-db/env.sh
 Network=partdb.network
 Label="traefik.enable=true"
 Label="traefik.http.routers.partdb.rule=Host(`components.sigmadraconis.ca`)"

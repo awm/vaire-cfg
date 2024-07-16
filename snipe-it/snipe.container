@@ -6,7 +6,7 @@ After=snipe-mariadb.service
 Image=docker.io/snipe/snipe-it:v7.0.8
 ContainerName=snipe
 AutoUpdate=registery
-EnvironmentFile=/home/awm/services/snipe-it/containers-environment
+EnvironmentFile=/home/awm/services/snipe-it/env.sh
 Network=snipe.network
 Label="traefik.enable=true"
 Label="traefik.http.routers.snipe.rule=Host(`assets.sigmadraconis.ca`)"

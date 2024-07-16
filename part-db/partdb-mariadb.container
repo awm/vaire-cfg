@@ -5,7 +5,7 @@ Description=Part-DB backend database quadlet
 Image=docker.io/mariadb:11
 ContainerName=partdb-mariadb
 AutoUpdate=registery
-EnvironmentFile=/home/awm/services/part-db/containers-environment
+EnvironmentFile=/home/awm/services/part-db/env.sh
 Network=partdb.network
 Volume=/home/awm/services/part-db/var/mysql:/var/lib/mysql
 

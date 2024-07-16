@@ -5,7 +5,7 @@ Description=Snipe-IT backend database quadlet
 Image=docker.io/mariadb:11
 ContainerName=snipe-mariadb
 AutoUpdate=registery
-EnvironmentFile=/home/awm/services/snipe-it/containers-environment
+EnvironmentFile=/home/awm/services/snipe-it/env.sh
 Network=snipe.network
 Volume=snipe-mariadb-vol:/var/lib/mysql
 
