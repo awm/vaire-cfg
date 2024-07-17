@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+#
+# Vairë service management tool
+#
 
 import argparse
 import glob
