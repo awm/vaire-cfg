@@ -1,0 +1,51 @@
+services:
+  backup:
+    crontab: |
+      # Collect up backups, and push to S3 once a week:
+      0 6 * * 1 cd services && poetry run ./services.py backup 2>&1 | logger -t backup
+
+  partdb:
+    backups:
+      - part-db/var/backups/*.zip
+    start:
+      - partdb
+    stop:
+      - partdb
+      - partdb-mariadb
+    quadlets:
+      - part-db/partdb-mariadb.container
+      - part-db/partdb.container
+      - part-db/partdb.network
+    crontab: |
+      # Run backup for Part-DB once a week:
+      PARTDB_EXEC="podman exec --user=www-data partdb"
+      0 0 * * 1 $PARTDB_EXEC php bin/console partdb:backup --full var/backups/$(date -u '+%F_%H-%M-%S').zip 2>&1 | logger -t part-db
+      0 5 * * 1 $PARTDB_EXEC find 'var/backups/*_*.zip' -mtime +7 -exec rm {} \; 2>&1 | logger -t part-db
+    secretfiles:
+      - part-db/env.sh
+
+  snipe:
+    backups:
+      - snipe-it/var/backups/*.zip
+    start:
+      - snipe
+    stop:
+      - snipe
+      - snipe-mariadb
+    quadlets:
+      - snipe-it/snipe-mariadb.container
+      - snipe-it/snipe.container
+      - snipe-it/snipe.network
+    secretfiles:
+      - snipe-it/env.sh
+
+  traefik:
+    start:
+      - traefik
+    stop:
+      - traefik
+    quadlets:
+      - traefik/traefik.container
+    secretfiles:
+      - traefik/env.sh
+      - traefik/users.txt
