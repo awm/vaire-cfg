@@ -353,6 +353,33 @@ def secrets(args: argparse.Namespace) -> None:
     del secrets
 
 
+def fetch(args: argparse.Namespace) -> None:
+    """Download and decrypt a stored backup file.
+
+    Args:
+        args (argparse.Namespace): Command line parameters and services list.
+    """
+    secrets = load_secrets()
+
+    os.environ["AWS_ACCESS_KEY_ID"] = secrets["apis"]["aws"]["key"]
+    os.environ["AWS_SECRET_ACCESS_KEY"] = secrets["apis"]["aws"]["secret"]
+
+    crypto = awscrypt.EncryptionSDKClient()
+    key = awscrypt.StrictAwsKmsMasterKeyProvider(key_ids=[secrets["services"]["backup"]["key_arn"]])
+    mountpoint = mount_bucket(secrets["services"]["backup"]["bucket"], secrets["services"]["backup"]["region"])
+
+    for service in args.services:
+        if service.selected:
+            source = os.path.join(mountpoint, service.name, args.file)
+            dest = args.file
+            xcrypt(crypto, key, False, source, dest)
+
+    unmount_bucket(mountpoint)
+
+    del os.environ["AWS_ACCESS_KEY_ID"]
+    del os.environ["AWS_SECRET_ACCESS_KEY"]
+
+
 def load_templates(args: argparse.Namespace) -> dict[str, jinja2.Template]:
     """Load the secret file templates for deployed services.
 
@@ -429,7 +456,7 @@ def make_argparser(services: list[Service]) -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(required=True)
 
     parser_reload = subparsers.add_parser("reload", help="reload services daemon")
-    parser_reload.set_defaults(func=reload, services=services)
+    parser_reload.set_defaults(func=reload, services=services, service=[])
 
     parser_status = subparsers.add_parser("status", help="display service status")
     parser_status.set_defaults(func=status, services=services, service=[])
@@ -463,6 +490,13 @@ def make_argparser(services: list[Service]) -> argparse.ArgumentParser:
     parser_secrets = subparsers.add_parser("secrets", help="(re)generate secrets files for deployed services")
     parser_secrets.set_defaults(func=secrets, services=services, service=[])
 
+    parser_fetch = subparsers.add_parser(
+        "fetch", help="fetch a stored backup file and place the decrypted version in the CWD"
+    )
+    parser_fetch.add_argument("service", help="service", choices=[s.name for s in services])
+    parser_fetch.add_argument("file", help="backup file to retrieve from S3")
+    parser_fetch.set_defaults(func=fetch, services=services)
+
     return parser
 
 
@@ -484,7 +518,9 @@ def parse_arguments(parser: argparse.ArgumentParser) -> argparse.Namespace:
         _logger.setLevel(logging.DEBUG)
 
     for service in args.services:
-        if service.name in args.service:
+        if isinstance(args.service, str) and service.name == args.service:
+            service.selected = True
+        elif isinstance(args.service, list) and service.name in args.service:
             service.selected = True
 
     return args
