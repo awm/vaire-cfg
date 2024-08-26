@@ -21,7 +21,7 @@ services:
       # Run backup for Part-DB once a week:
       PARTDB_EXEC="podman exec --user=www-data partdb"
       0 0 * * 1 $PARTDB_EXEC php bin/console partdb:backup --full var/backups/partdb-$(date -u '+%F_%H-%M-%S').zip 2>&1 | logger -t part-db
-      0 5 * * 1 $PARTDB_EXEC find . 'var/backups/*_*.zip' -mtime +7 -exec rm {} \; 2>&1 | logger -t part-db
+      0 5 * * 1 $PARTDB_EXEC find var/backups -name '*_*.zip' -mtime +30 -exec rm {} \; 2>&1 | logger -t part-db
     secretfiles:
       - part-db/env.sh
 
