@@ -3,7 +3,7 @@ Description=Part-DB quadlet
 After=partdb-mariadb.service
 
 [Container]
-Image=docker.io/jbtronics/part-db1:1.13.1
+Image=docker.io/jbtronics/part-db1:2
 ContainerName=partdb
 AutoUpdate=registery
 EnvironmentFile=/home/awm/services/part-db/env.sh
