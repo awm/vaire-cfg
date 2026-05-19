@@ -2,7 +2,7 @@
 Description=Traefik reverse proxy quadlet
 
 [Container]
-Image=docker.io/traefik:3.0
+Image=docker.io/traefik:3
 ContainerName=traefik
 AutoUpdate=registery
 EnvironmentFile=/home/awm/services/traefik/env.sh
