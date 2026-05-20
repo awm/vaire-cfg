@@ -3,7 +3,7 @@ Description=Snipe-IT quadlet
 After=snipe-mariadb.service
 
 [Container]
-Image=docker.io/snipe/snipe-it:v7.0.8
+Image=docker.io/snipe/snipe-it:v8.5.0
 ContainerName=snipe
 AutoUpdate=registery
 EnvironmentFile=/home/awm/services/snipe-it/env.sh
